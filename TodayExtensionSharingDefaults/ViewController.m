@@ -9,10 +9,17 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
 
 @implementation ViewController
+- (IBAction)setPressedButton:(UIButton *)sender {
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ivc.TodayExtensionSharingDefaults"];
+    
+    [sharedDefaults setInteger:[self.textField.text integerValue] forKey:@"MyNumberKey"];
+    [sharedDefaults synchronize];   // (!!) This is crucial.
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
